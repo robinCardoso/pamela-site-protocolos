@@ -1197,8 +1197,10 @@
 
         const holidayAudio = new Audio('assets/audio/natal-musicbox.mp3');
         holidayAudio.loop = true;
-        holidayAudio.preload = 'metadata';
+        holidayAudio.preload = 'auto';
         holidayAudio.volume = 0.35;
+        let musicUserStopped = false;
+        let unlockBound = false;
 
         function setMusicVolume(value) {
             holidayAudio.volume = Math.max(0, Math.min(1, value / 100));
@@ -1223,26 +1225,65 @@
             }
         }
 
-        async function toggleMusic() {
+        async function startMusic() {
+            if (musicUserStopped || !holidayAudio.paused) return true;
+            setMusicVolume(musicVolumeInput ? Number(musicVolumeInput.value) : 35);
+            try {
+                await holidayAudio.play();
+                setMusicUiPlaying(true);
+                return true;
+            } catch (err) {
+                setMusicUiPlaying(false);
+                return false;
+            }
+        }
+
+        async function toggleMusic(event) {
+            if (event) event.stopPropagation();
             setMusicVolume(musicVolumeInput ? Number(musicVolumeInput.value) : 35);
 
             if (!holidayAudio.paused) {
+                musicUserStopped = true;
                 holidayAudio.pause();
                 setMusicUiPlaying(false);
                 return;
             }
 
-            try {
-                await holidayAudio.play();
-                setMusicUiPlaying(true);
-            } catch (err) {
-                console.warn('Não foi possível iniciar o áudio:', err);
-                setMusicUiPlaying(false);
-            }
+            musicUserStopped = false;
+            const ok = await startMusic();
+            if (!ok) console.warn('Não foi possível iniciar o áudio');
+        }
+
+        function bindMusicUnlock() {
+            if (unlockBound) return;
+            unlockBound = true;
+            const unlock = async () => {
+                if (musicUserStopped || !holidayAudio.paused) return;
+                const ok = await startMusic();
+                if (ok) {
+                    document.removeEventListener('pointerdown', unlock);
+                    document.removeEventListener('touchstart', unlock);
+                    document.removeEventListener('keydown', unlock);
+                    document.removeEventListener('scroll', unlock);
+                }
+            };
+            document.addEventListener('pointerdown', unlock, { passive: true });
+            document.addEventListener('touchstart', unlock, { passive: true });
+            document.addEventListener('keydown', unlock);
+            document.addEventListener('scroll', unlock, { passive: true, once: true });
         }
 
         holidayAudio.addEventListener('ended', () => setMusicUiPlaying(false));
         musicBtn.addEventListener('click', toggleMusic);
+
+        // Tenta autoplay; se o navegador bloquear, inicia no 1º toque/scroll
+        (async () => {
+            const ok = await startMusic();
+            if (!ok) {
+                musicBtn.classList.add('music-btn-hint');
+                bindMusicUnlock();
+            }
+        })();
 
         /* -------------------------------------------------------------
            3. 3D Envelope Opening & Reveal Logic
