@@ -10,8 +10,10 @@
     <meta property="og:locale" content="pt_BR">
     <meta property="og:title" content="Magia do Natal | Fada da Pele">
     <meta property="og:description" content="Sua carta VIP de Natal chegou. Escolha seus combos mágicos e garanta condições exclusivas de pré-venda.">
-    <meta property="og:image" content="assets/og-magia-natal.jpg">
+    <meta property="og:image" content="https://robincardoso.github.io/pamela-site-protocolos/assets/typography-preview.png">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/favicon.svg">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -444,7 +446,7 @@
                     <span id="music-icon" class="text-xmas-gold text-xs sm:text-sm">
                         <i class="fa-solid fa-music"></i>
                     </span>
-                    <span id="music-text" class="hidden sm:inline text-[11px]">Música</span>
+                    <span id="music-text" class="hidden sm:inline text-[11px]">Natal</span>
                     <span id="music-status" class="w-2 h-2 rounded-full bg-red-400" aria-hidden="true"></span>
                 </button>
             </div>
@@ -1173,7 +1175,7 @@
         setInterval(updateCountdown, 1000);
 
         /* -------------------------------------------------------------
-           2. Web Audio — Silent Night (lento) + pad + reverb
+           2. Web Audio — “We Wish You a Merry Christmas” + sinos
            ------------------------------------------------------------- */
         let audioCtx = null;
         let isPlaying = false;
@@ -1182,20 +1184,25 @@
         let masterGain = null;
         let musicVolume = 0.35;
 
-        const silentNightMelody = [
-            { f: 392.0, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 440.0, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 329.63, d: 1.5 },
-            { f: 392.0, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 440.0, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 329.63, d: 1.5 },
-            { f: 493.88, d: 1.05 }, { f: 493.88, d: 1.05 }, { f: 587.33, d: 1.05 }, { f: 493.88, d: 1.05 }, { f: 440.0, d: 1.5 },
-            { f: 392.0, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 587.33, d: 1.05 }, { f: 493.88, d: 1.05 }, { f: 440.0, d: 1.5 },
-            { f: 440.0, d: 1.05 }, { f: 440.0, d: 1.05 }, { f: 493.88, d: 1.05 }, { f: 440.0, d: 1.05 }, { f: 392.0, d: 1.5 },
-            { f: 329.63, d: 1.05 }, { f: 329.63, d: 1.05 }, { f: 392.0, d: 1.05 }, { f: 440.0, d: 1.05 }, { f: 392.0, d: 2.0 }
+        // Melodia clássica de Natal (We Wish You a Merry Christmas)
+        const christmasMelody = [
+            { f: 293.66, d: 0.38 }, { f: 392.0, d: 0.38 }, { f: 392.0, d: 0.22 },
+            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.22 }, { f: 369.99, d: 0.22 },
+            { f: 329.63, d: 0.45 }, { f: 261.63, d: 0.38 }, { f: 329.63, d: 0.38 },
+            { f: 440.0, d: 0.38 }, { f: 440.0, d: 0.22 }, { f: 493.88, d: 0.22 },
+            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.22 }, { f: 369.99, d: 0.45 },
+            { f: 293.66, d: 0.38 }, { f: 369.99, d: 0.38 }, { f: 493.88, d: 0.38 },
+            { f: 493.88, d: 0.22 }, { f: 523.25, d: 0.22 }, { f: 493.88, d: 0.22 },
+            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.45 }, { f: 329.63, d: 0.38 },
+            { f: 293.66, d: 0.22 }, { f: 293.66, d: 0.22 }, { f: 329.63, d: 0.38 },
+            { f: 440.0, d: 0.38 }, { f: 369.99, d: 0.38 }, { f: 392.0, d: 0.72 }
         ];
 
         const chordProgression = [
-            [392.0, 493.88, 587.33],
+            [261.63, 329.63, 392.0],
+            [293.66, 369.99, 440.0],
             [329.63, 392.0, 493.88],
-            [440.0, 554.37, 659.25],
-            [392.0, 493.88, 587.33]
+            [261.63, 329.63, 392.0]
         ];
 
         function createReverb(context) {
@@ -1240,15 +1247,35 @@
             audioCtx._fadaBus = bus;
         }
 
+        function playSleighBell() {
+            if (!audioCtx || !audioCtx._fadaBus) return;
+            const bus = audioCtx._fadaBus;
+            const t = audioCtx.currentTime;
+            const peak = 0.055 * (musicVolume / 0.35);
+            [880, 1175, 1568].forEach((freq, i) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, t);
+                gain.gain.setValueAtTime(0.001, t);
+                gain.gain.exponentialRampToValueAtTime(peak * (1 - i * 0.25), t + 0.008);
+                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+                osc.connect(gain);
+                gain.connect(bus);
+                osc.start(t);
+                osc.stop(t + 0.25);
+            });
+        }
+
         function playCelestaNote(freq, dur) {
             if (!audioCtx || !audioCtx._fadaBus) return;
             const bus = audioCtx._fadaBus;
             const t = audioCtx.currentTime;
-            const peak = 0.11 * (musicVolume / 0.35);
+            const peak = 0.12 * (musicVolume / 0.35);
 
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            osc.type = 'triangle';
+            osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, t);
 
             const oscHarmonic = audioCtx.createOscillator();
@@ -1299,22 +1326,23 @@
         function playSongLoop() {
             if (!isPlaying) return;
 
-            if (noteIdx >= silentNightMelody.length) {
+            if (noteIdx >= christmasMelody.length) {
                 noteIdx = 0;
-                noteTimer = setTimeout(playSongLoop, 850);
+                noteTimer = setTimeout(playSongLoop, 650);
                 return;
             }
 
-            const note = silentNightMelody[noteIdx];
+            const note = christmasMelody[noteIdx];
             playCelestaNote(note.f, note.d);
+            playSleighBell();
 
-            if (noteIdx % 5 === 0) {
-                const chord = chordProgression[Math.floor(noteIdx / 5) % chordProgression.length];
-                playSoftChord(chord, 2.4);
+            if (noteIdx % 4 === 0) {
+                const chord = chordProgression[Math.floor(noteIdx / 4) % chordProgression.length];
+                playSoftChord(chord, 1.6);
             }
 
             noteIdx += 1;
-            noteTimer = setTimeout(playSongLoop, note.d * 1000 + 180);
+            noteTimer = setTimeout(playSongLoop, note.d * 1000 + 95);
         }
 
         const musicBtn = document.getElementById('music-btn');
@@ -1346,7 +1374,7 @@
                 noteIdx = 0;
                 musicStatus.classList.remove('bg-emerald-400');
                 musicStatus.classList.add('bg-red-400');
-                musicText.innerText = 'Música';
+                musicText.innerText = 'Natal';
                 musicBtn.setAttribute('aria-pressed', 'false');
             } else {
                 isPlaying = true;
