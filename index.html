@@ -356,6 +356,22 @@
             animation: letter-fade-in 0.45s ease forwards;
         }
 
+        /* Combos só após abrir a carta */
+        #ofertas-pos-carta {
+            display: none;
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        #ofertas-pos-carta.is-visible {
+            display: block;
+            animation: letter-rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        #mobile-checkout-bar.is-locked {
+            display: none !important;
+        }
+
         /* Safe Bottom Padding on Mobile so the sticky bar never overlaps content */
         .has-sticky-bar {
             padding-bottom: 95px;
@@ -427,7 +443,7 @@
         }
     </style>
 </head>
-<body class="has-sticky-bar antialiased">
+<body class="antialiased">
 
     <!-- Interactive Canvas: Responsive Falling Snow + Twinkling Fairy Pixie Dust -->
     <canvas id="snow-canvas"></canvas>
@@ -611,27 +627,32 @@
                             <p class="editorial-brand text-[10px] sm:text-xs text-xmas-cream/90 mt-1">Fada da Pele 🧚🏻‍♀️</p>
                         </div>
                         
-                        <a href="#catalogo" class="px-3.5 py-2 rounded-full bg-gradient-to-r from-xmas-gold to-amber-600 text-stone-950 font-bold text-[10px] sm:text-xs uppercase tracking-wider hover:opacity-95 transition shadow-md flex items-center gap-1.5">
+                        <button type="button" id="btn-ver-combos" class="px-3.5 py-2 rounded-full bg-gradient-to-r from-xmas-gold to-amber-600 text-stone-950 font-bold text-[10px] sm:text-xs uppercase tracking-wider hover:opacity-95 transition shadow-md flex items-center gap-1.5">
                             <span>Ver Combos</span>
                             <i class="fa-solid fa-arrow-down text-[10px]"></i>
-                        </a>
+                        </button>
                     </div>
                 </article>
 
                 <!-- Callout Banner Below Letter -->
                 <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-xmas-dark via-xmas-crimson to-xmas-dark border border-xmas-gold/40 text-center shadow-lg">
                     <p class="text-xs sm:text-sm text-stone-100 font-medium">
-                        ❤️ <span class="text-xmas-goldLight font-bold">A magia já começou!</span> Explore nosso catálogo, escolha seus combos favoritos e garanta o seu com condições exclusivas de pré-venda.
+                        ❤️ <span class="text-xmas-goldLight font-bold">A magia já começou!</span> Sua seleção VIP está liberada logo abaixo.
                     </p>
-                    <p class="text-[11px] text-rose-200 mt-1 font-semibold">
-                        ⏳ Mas não deixe para depois: as condições são por tempo limitado!
+                    <button type="button" id="btn-ver-combos-banner" class="mt-3 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-stone-950 font-bold text-[11px] uppercase tracking-wider shadow-md active:scale-95">
+                        <span>Ver combos mágicos</span>
+                        <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                    </button>
+                    <p class="text-[11px] text-rose-200 mt-2 font-semibold">
+                        ⏳ Condições por tempo limitado!
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- 2. CATALOG SECTION: COMBOS WITH SELECTION -->
-        <section id="catalogo" class="w-full mt-10 pt-4 scroll-mt-20">
+        <!-- 2. CATALOG + CTA (somente após abrir a carta) -->
+        <div id="ofertas-pos-carta" aria-hidden="true">
+        <section id="catalogo" class="w-full mt-10 pt-4 scroll-mt-24">
             
             <div class="text-center mb-8 w-full">
                 <span class="text-[10px] sm:text-xs editorial-brand tracking-[0.2em] text-xmas-cream/80 font-normal">
@@ -1036,6 +1057,7 @@
                 </button>
             </div>
         </section>
+        </div>
 
         <!-- Footer -->
         <footer class="mt-12 text-center text-[10px] sm:text-xs text-xmas-roseSoft/60 space-y-1.5 pb-2">
@@ -1045,12 +1067,12 @@
                 <a href="https://wa.me/5549988429631" class="text-xmas-gold/90 hover:text-xmas-goldLight underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp (49) 98842-9631</a>
             </p>
             <p>© Todos os direitos reservados. Cuide da sua beleza com amor.</p>
-            <p class="text-[9px] text-xmas-roseSoft/45">Trilha: Silent Night (music box) — arquivo público / Internet Archive</p>
+            <p class="text-[9px] text-xmas-roseSoft/45">Trilha: Jingle Bells (music box) — arquivo público / Internet Archive</p>
         </footer>
     </main>
 
-    <!-- 4. STICKY MOBILE ACTION BAR (Persistent on Phones) -->
-    <div class="fixed bottom-0 left-0 w-full z-40 p-3 bg-xmas-dark/95 backdrop-blur-lg border-t border-xmas-gold/40 md:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
+    <!-- 4. STICKY MOBILE ACTION BAR (só após abrir a carta) -->
+    <div id="mobile-checkout-bar" class="is-locked fixed bottom-0 left-0 w-full z-40 p-3 bg-xmas-dark/95 backdrop-blur-lg border-t border-xmas-gold/40 md:hidden shadow-[0_-5px_20px_rgba(0,0,0,0.5)]">
         <div class="max-w-md mx-auto flex items-center justify-between gap-2.5">
             <div class="flex flex-col">
                 <span class="text-[9px] uppercase tracking-wider text-xmas-roseGold">Pré-Venda VIP</span>
@@ -1195,7 +1217,7 @@
         const musicText = document.getElementById('music-text');
         const musicVolumeInput = document.getElementById('music-volume');
 
-        const holidayAudio = new Audio('assets/audio/natal-musicbox.mp3');
+        const holidayAudio = new Audio('assets/audio/jingle-bells.mp3');
         holidayAudio.loop = true;
         holidayAudio.preload = 'auto';
         holidayAudio.volume = 0.35;
@@ -1314,6 +1336,38 @@
             }
         }
 
+        const ofertasPosCarta = document.getElementById('ofertas-pos-carta');
+        const mobileCheckoutBar = document.getElementById('mobile-checkout-bar');
+        let ofertasLiberadas = false;
+
+        function scrollToCatalog() {
+            const catalogo = document.getElementById('catalogo');
+            if (!catalogo) return;
+            catalogo.scrollIntoView({
+                behavior: reduceMotion ? 'auto' : 'smooth',
+                block: 'start'
+            });
+        }
+
+        function unlockOfertas({ autoScroll = true } = {}) {
+            if (ofertasLiberadas) {
+                if (autoScroll) scrollToCatalog();
+                return;
+            }
+            ofertasLiberadas = true;
+            if (ofertasPosCarta) {
+                ofertasPosCarta.classList.add('is-visible');
+                ofertasPosCarta.setAttribute('aria-hidden', 'false');
+            }
+            if (mobileCheckoutBar) {
+                mobileCheckoutBar.classList.remove('is-locked');
+            }
+            document.body.classList.add('has-sticky-bar');
+            if (autoScroll) {
+                setTimeout(scrollToCatalog, reduceMotion ? 80 : 450);
+            }
+        }
+
         function revealLetterPanel() {
             letterModal.classList.remove('letter-hidden');
             letterModal.classList.remove('letter-rise-in', 'letter-fade-in');
@@ -1336,11 +1390,6 @@
             envelopeWrapper.classList.remove('cursor-pointer');
             envelopeWrapper.setAttribute('tabindex', '-1');
 
-            musicBtn.classList.add('music-btn-hint', 'ring-2', 'ring-xmas-gold/70');
-            setTimeout(() => {
-                musicBtn.classList.remove('music-btn-hint', 'ring-2', 'ring-xmas-gold/70');
-            }, 4500);
-
             if (navigator.vibrate && !reduceMotion) {
                 navigator.vibrate(12);
             }
@@ -1359,6 +1408,7 @@
                 envelopeFlap.classList.add('is-open');
                 revealLetterPanel();
                 setTimeout(collapseEnvelopeShell, 280);
+                setTimeout(() => unlockOfertas({ autoScroll: true }), 500);
                 return;
             }
 
@@ -1382,7 +1432,15 @@
             setTimeout(() => {
                 collapseEnvelopeShell();
             }, 1100);
+
+            /* Fase 5 — libera e leva aos combos */
+            setTimeout(() => {
+                unlockOfertas({ autoScroll: true });
+            }, 1650);
         }
+
+        document.getElementById('btn-ver-combos')?.addEventListener('click', () => unlockOfertas({ autoScroll: true }));
+        document.getElementById('btn-ver-combos-banner')?.addEventListener('click', () => unlockOfertas({ autoScroll: true }));
 
         envelopeWrapper.addEventListener('click', openEnvelopeHandler);
         envelopeWrapper.addEventListener('keydown', openEnvelopeHandler);
