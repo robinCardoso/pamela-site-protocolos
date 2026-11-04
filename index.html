@@ -639,7 +639,7 @@
                     <p class="text-xs sm:text-sm text-stone-100 font-medium">
                         ❤️ <span class="text-xmas-goldLight font-bold">A magia já começou!</span> Sua seleção VIP está liberada logo abaixo.
                     </p>
-                    <button type="button" id="btn-ver-combos-banner" class="mt-3 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-stone-950 font-bold text-[11px] uppercase tracking-wider shadow-md active:scale-95">
+                    <button type="button" id="btn-ver-combos-banner" class="btn-magic-pulse mt-3 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-300 via-amber-400 to-amber-600 text-stone-950 font-bold text-[11px] uppercase tracking-wider shadow-md active:scale-95">
                         <span>Ver combos mágicos</span>
                         <i class="fa-solid fa-arrow-down text-[10px]"></i>
                     </button>
@@ -1408,7 +1408,6 @@
                 envelopeFlap.classList.add('is-open');
                 revealLetterPanel();
                 setTimeout(collapseEnvelopeShell, 280);
-                setTimeout(() => unlockOfertas({ autoScroll: true }), 500);
                 return;
             }
 
@@ -1428,15 +1427,10 @@
                 revealLetterPanel();
             }, 720);
 
-            /* Fase 4 — some envelope */
+            /* Fase 4 — some envelope (combos só ao clicar em Ver Combos) */
             setTimeout(() => {
                 collapseEnvelopeShell();
             }, 1100);
-
-            /* Fase 5 — libera e leva aos combos */
-            setTimeout(() => {
-                unlockOfertas({ autoScroll: true });
-            }, 1650);
         }
 
         document.getElementById('btn-ver-combos')?.addEventListener('click', () => unlockOfertas({ autoScroll: true }));
