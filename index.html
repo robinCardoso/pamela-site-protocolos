@@ -162,40 +162,45 @@
 
         @media (min-width: 640px) {
             .editorial-title-block {
-                text-align: right;
+                text-align: center;
                 margin-left: auto;
-                margin-right: 0;
+                margin-right: auto;
             }
 
             .editorial-title-block .editorial-display {
-                align-items: flex-end;
+                align-items: center;
             }
 
             .editorial-title-block .editorial-display .editorial-script-accent {
                 margin-top: 0.3em;
-                margin-right: 0;
-                margin-left: 1.25rem;
-                align-self: flex-end;
-                transform: rotate(-5deg);
+                margin-left: 0.75rem;
+                align-self: center;
+                transform: rotate(-4deg);
             }
 
             .editorial-section-title {
-                align-items: flex-end;
-                text-align: right;
-                max-width: 20rem;
+                align-items: center;
+                text-align: center;
+                max-width: 22rem;
                 margin-left: auto;
                 margin-right: auto;
             }
 
             .editorial-section-title .editorial-display {
-                align-items: flex-end;
+                align-items: center;
             }
 
             .editorial-section-title .editorial-display .editorial-script-accent {
-                margin-top: 0.2em;
-                margin-left: 1.5rem;
-                align-self: flex-end;
+                margin-top: 0.22em;
+                margin-left: 0.5rem;
+                align-self: center;
             }
+        }
+
+        /* Cards de combo com altura uniforme no grid */
+        .combo-card {
+            height: 100%;
+            min-height: 100%;
         }
 
         /* Ambient Fairy & Snow Canvas */
@@ -211,11 +216,17 @@
 
         /* Glassmorphism Styles */
         .glass-card {
-            background: rgba(45, 3, 7, 0.72);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(45, 3, 7, 0.88);
             border: 1px solid rgba(226, 184, 106, 0.35);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(248, 193, 207, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+        }
+
+        @media (min-width: 768px) {
+            .glass-card {
+                background: rgba(45, 3, 7, 0.78);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
         }
 
         /* Shimmering Gold Text */
@@ -457,8 +468,8 @@
     <main class="relative z-20 px-4 sm:px-6 max-w-4xl mx-auto flex flex-col items-center">
 
         <!-- Festive Heading -->
-        <section class="pt-6 sm:pt-10 pb-4 w-full max-w-lg sm:max-w-xl mx-auto">
-            <div class="flex justify-center sm:justify-end mb-4">
+        <section class="pt-6 sm:pt-10 pb-4 w-full max-w-lg sm:max-w-xl mx-auto text-center">
+            <div class="flex justify-center mb-4">
                 <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-xmas-burgundy/40 border border-xmas-editorialRose/25 mb-0 shadow-sm">
                     <span class="text-[10px] sm:text-xs editorial-brand tracking-[0.18em] text-xmas-cream/95 font-normal">
                         Pré-venda exclusiva VIP
@@ -466,21 +477,21 @@
                 </div>
             </div>
 
-            <div class="editorial-title-block w-full max-w-md sm:max-w-lg mx-auto sm:mx-0 sm:ml-auto px-1">
+            <div class="editorial-title-block w-full max-w-md sm:max-w-lg mx-auto px-1">
                 <h1 class="editorial-display">
                     <span class="editorial-serif-line">Magia do</span>
                     <span class="editorial-script-accent">Natal</span>
                 </h1>
             </div>
 
-            <p class="editorial-subtitle text-center sm:text-right sm:max-w-lg sm:ml-auto mt-3 sm:mt-2 sm:pr-2 px-1">
+            <p class="editorial-subtitle text-center max-w-lg mx-auto mt-3 sm:mt-2 px-1">
                 Seu presente começa aqui
             </p>
-            <p class="text-[11px] sm:text-xs text-xmas-cream/75 mt-3 font-light px-2 leading-relaxed text-center sm:text-right sm:max-w-md sm:ml-auto">
+            <p class="text-[11px] sm:text-xs text-xmas-cream/75 mt-3 font-light px-2 leading-relaxed text-center max-w-md mx-auto">
                 Preparamos uma experiência sensorial única para celebrar sua luz e renovar sua beleza neste fim de ano.
             </p>
 
-            <div class="flex justify-center sm:justify-end">
+            <div class="flex justify-center">
             <div id="presale-countdown" class="mt-5 inline-flex flex-col items-center gap-2 px-4 py-3 rounded-2xl glass-card border border-xmas-gold/35" aria-live="polite">
                 <span class="text-[10px] uppercase tracking-widest text-xmas-gold font-semibold">Pré-venda encerra em</span>
                 <div class="flex gap-2 sm:gap-3 text-center">
@@ -643,10 +654,10 @@
             </a>
 
             <!-- Responsive Catalog Grid: 1 col on mobile, 2 on tablet, 3 on desktop -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 w-full items-stretch">
                 
                 <!-- COMBO 1: Regenere -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Efeito BB Cream Coreano
                     </div>
@@ -695,7 +706,7 @@
                 </div>
 
                 <!-- COMBO 2: Essence -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-amber-500 to-amber-700 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Firmeza & Rejuvenescimento
                     </div>
@@ -740,7 +751,7 @@
                 </div>
 
                 <!-- COMBO 3: Lift (Ultraformer MPT Full Face) -->
-                <div id="combo-lift" class="order-first glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border-2 border-xmas-gold relative group bg-gradient-to-b from-[#5c030d]/90 to-[#2c0005]/95 shadow-2xl scroll-mt-24">
+                <div id="combo-lift" class="order-first combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border-2 border-xmas-gold relative group bg-gradient-to-b from-[#5c030d]/90 to-[#2c0005]/95 shadow-2xl scroll-mt-24">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 text-stone-900 text-[9px] sm:text-[10px] font-black px-3 py-0.5 rounded-full shadow-lg uppercase tracking-wider whitespace-nowrap">
                         Super VIP • MPT Full Face
                     </div>
@@ -789,7 +800,7 @@
                 </div>
 
                 <!-- COMBO 4: Desperta -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-emerald-600 to-teal-700 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Renovação Intensa
                     </div>
@@ -834,7 +845,7 @@
                 </div>
 
                 <!-- COMBO 5: Hollywood -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Glow de Estrela
                     </div>
@@ -879,7 +890,7 @@
                 </div>
 
                 <!-- COMBO 6: Glúteo Up -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-red-500 to-rose-600 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Remodelação & Colágeno
                     </div>
@@ -913,7 +924,7 @@
                 </div>
 
                 <!-- COMBO 7: Mom Lift (Pós-Gestação) -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-pink-400 to-rose-500 text-white text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Recuperação Pós-Parto
                     </div>
@@ -947,7 +958,7 @@
                 </div>
 
                 <!-- COMBO 8: Collagen Body -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
+                <div class="combo-card glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between border border-xmas-gold/40 hover:border-xmas-gold transition relative group">
                     <div class="absolute -top-2.5 right-3 bg-gradient-to-r from-amber-400 to-yellow-600 text-stone-900 text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow-md uppercase tracking-wider">
                         Corpo Inteiro Radiante
                     </div>
@@ -1034,6 +1045,7 @@
                 <a href="https://wa.me/5549988429631" class="text-xmas-gold/90 hover:text-xmas-goldLight underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer">WhatsApp (49) 98842-9631</a>
             </p>
             <p>© Todos os direitos reservados. Cuide da sua beleza com amor.</p>
+            <p class="text-[9px] text-xmas-roseSoft/45">Trilha: Silent Night (music box) — arquivo público / Internet Archive</p>
         </footer>
     </main>
 
@@ -1074,8 +1086,9 @@
         });
 
         const isMobile = window.innerWidth < 768;
-        const PARTICLE_COUNT = prefersReducedMotion ? 0 : (isMobile ? 28 : 50);
+        const PARTICLE_COUNT = prefersReducedMotion ? 0 : (isMobile ? 12 : 22);
         const particles = [];
+        let particleFrame = 0;
 
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
@@ -1090,19 +1103,19 @@
             reset() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * -height;
-                this.size = Math.random() * 2.5 + 1;
-                this.speedY = Math.random() * 0.9 + 0.4;
-                this.speedX = Math.sin(Math.random() * Math.PI) * 0.5;
-                this.opacity = Math.random() * 0.7 + 0.3;
+                this.size = Math.random() * 2 + 1;
+                this.speedY = Math.random() * 0.7 + 0.3;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.35;
+                this.opacity = Math.random() * 0.55 + 0.25;
                 this.isGold = Math.random() > 0.4;
                 this.color = this.isGold
                     ? `rgba(226, 184, 106, ${this.opacity})`
-                    : `rgba(252, 231, 237, ${this.opacity * 0.9})`;
+                    : `rgba(252, 231, 237, ${this.opacity * 0.85})`;
             }
 
             update() {
                 this.y += this.speedY;
-                this.x += this.speedX + Math.sin(this.y * 0.015) * 0.35;
+                this.x += this.speedX + Math.sin(this.y * 0.015) * 0.25;
 
                 if (this.y > height) {
                     this.reset();
@@ -1114,8 +1127,6 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = this.isGold ? 6 : 2;
-                ctx.shadowColor = this.isGold ? '#e2b86a' : '#ffffff';
                 ctx.fill();
             }
         }
@@ -1127,7 +1138,9 @@
         }
 
         function runParticleLoop() {
-            if (particlesEnabled && animationRunning && particles.length) {
+            particleFrame += 1;
+            // Alterna frames no desktop pesado / sempre no mobile leve
+            if (particlesEnabled && animationRunning && particles.length && (!isMobile || particleFrame % 2 === 0)) {
                 ctx.clearRect(0, 0, width, height);
                 for (let i = 0; i < particles.length; i++) {
                     particles[i].update();
@@ -1175,218 +1188,60 @@
         setInterval(updateCountdown, 1000);
 
         /* -------------------------------------------------------------
-           2. Web Audio — “We Wish You a Merry Christmas” + sinos
+           2. Áudio MP3 natalino (music box — Silent Night)
            ------------------------------------------------------------- */
-        let audioCtx = null;
-        let isPlaying = false;
-        let noteTimer = null;
-        let noteIdx = 0;
-        let masterGain = null;
-        let musicVolume = 0.35;
-
-        // Melodia clássica de Natal (We Wish You a Merry Christmas)
-        const christmasMelody = [
-            { f: 293.66, d: 0.38 }, { f: 392.0, d: 0.38 }, { f: 392.0, d: 0.22 },
-            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.22 }, { f: 369.99, d: 0.22 },
-            { f: 329.63, d: 0.45 }, { f: 261.63, d: 0.38 }, { f: 329.63, d: 0.38 },
-            { f: 440.0, d: 0.38 }, { f: 440.0, d: 0.22 }, { f: 493.88, d: 0.22 },
-            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.22 }, { f: 369.99, d: 0.45 },
-            { f: 293.66, d: 0.38 }, { f: 369.99, d: 0.38 }, { f: 493.88, d: 0.38 },
-            { f: 493.88, d: 0.22 }, { f: 523.25, d: 0.22 }, { f: 493.88, d: 0.22 },
-            { f: 440.0, d: 0.22 }, { f: 392.0, d: 0.45 }, { f: 329.63, d: 0.38 },
-            { f: 293.66, d: 0.22 }, { f: 293.66, d: 0.22 }, { f: 329.63, d: 0.38 },
-            { f: 440.0, d: 0.38 }, { f: 369.99, d: 0.38 }, { f: 392.0, d: 0.72 }
-        ];
-
-        const chordProgression = [
-            [261.63, 329.63, 392.0],
-            [293.66, 369.99, 440.0],
-            [329.63, 392.0, 493.88],
-            [261.63, 329.63, 392.0]
-        ];
-
-        function createReverb(context) {
-            const duration = 1.8;
-            const rate = context.sampleRate;
-            const length = Math.floor(rate * duration);
-            const impulse = context.createBuffer(2, length, rate);
-            for (let ch = 0; ch < 2; ch++) {
-                const data = impulse.getChannelData(ch);
-                for (let i = 0; i < length; i++) {
-                    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 2.2);
-                }
-            }
-            const convolver = context.createConvolver();
-            convolver.buffer = impulse;
-            return convolver;
-        }
-
-        function initAudioGraph() {
-            if (audioCtx && masterGain) return;
-
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext();
-
-            masterGain = audioCtx.createGain();
-            masterGain.gain.value = musicVolume;
-
-            const reverb = createReverb(audioCtx);
-            const dryGain = audioCtx.createGain();
-            const wetGain = audioCtx.createGain();
-            dryGain.gain.value = 0.72;
-            wetGain.gain.value = 0.38;
-
-            const bus = audioCtx.createGain();
-            bus.connect(dryGain);
-            bus.connect(reverb);
-            reverb.connect(wetGain);
-            dryGain.connect(masterGain);
-            wetGain.connect(masterGain);
-            masterGain.connect(audioCtx.destination);
-
-            audioCtx._fadaBus = bus;
-        }
-
-        function playSleighBell() {
-            if (!audioCtx || !audioCtx._fadaBus) return;
-            const bus = audioCtx._fadaBus;
-            const t = audioCtx.currentTime;
-            const peak = 0.055 * (musicVolume / 0.35);
-            [880, 1175, 1568].forEach((freq, i) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, t);
-                gain.gain.setValueAtTime(0.001, t);
-                gain.gain.exponentialRampToValueAtTime(peak * (1 - i * 0.25), t + 0.008);
-                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
-                osc.connect(gain);
-                gain.connect(bus);
-                osc.start(t);
-                osc.stop(t + 0.25);
-            });
-        }
-
-        function playCelestaNote(freq, dur) {
-            if (!audioCtx || !audioCtx._fadaBus) return;
-            const bus = audioCtx._fadaBus;
-            const t = audioCtx.currentTime;
-            const peak = 0.12 * (musicVolume / 0.35);
-
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, t);
-
-            const oscHarmonic = audioCtx.createOscillator();
-            const gainHarmonic = audioCtx.createGain();
-            oscHarmonic.type = 'sine';
-            oscHarmonic.frequency.setValueAtTime(freq * 2.005, t);
-
-            gain.gain.setValueAtTime(0.001, t);
-            gain.gain.exponentialRampToValueAtTime(peak, t + 0.04);
-            gain.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.65);
-
-            gainHarmonic.gain.setValueAtTime(0.001, t);
-            gainHarmonic.gain.exponentialRampToValueAtTime(peak * 0.35, t + 0.04);
-            gainHarmonic.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.35);
-
-            osc.connect(gain);
-            oscHarmonic.connect(gainHarmonic);
-            gain.connect(bus);
-            gainHarmonic.connect(bus);
-
-            osc.start(t);
-            oscHarmonic.start(t);
-            osc.stop(t + dur + 0.75);
-            oscHarmonic.stop(t + dur + 0.75);
-        }
-
-        function playSoftChord(freqs, dur) {
-            if (!audioCtx || !audioCtx._fadaBus) return;
-            const bus = audioCtx._fadaBus;
-            const t = audioCtx.currentTime;
-            const level = 0.028 * (musicVolume / 0.35);
-
-            freqs.forEach((freq) => {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, t);
-                gain.gain.setValueAtTime(0.001, t);
-                gain.gain.exponentialRampToValueAtTime(level, t + 0.12);
-                gain.gain.exponentialRampToValueAtTime(0.0001, t + dur + 0.8);
-                osc.connect(gain);
-                gain.connect(bus);
-                osc.start(t);
-                osc.stop(t + dur + 0.9);
-            });
-        }
-
-        function playSongLoop() {
-            if (!isPlaying) return;
-
-            if (noteIdx >= christmasMelody.length) {
-                noteIdx = 0;
-                noteTimer = setTimeout(playSongLoop, 650);
-                return;
-            }
-
-            const note = christmasMelody[noteIdx];
-            playCelestaNote(note.f, note.d);
-            playSleighBell();
-
-            if (noteIdx % 4 === 0) {
-                const chord = chordProgression[Math.floor(noteIdx / 4) % chordProgression.length];
-                playSoftChord(chord, 1.6);
-            }
-
-            noteIdx += 1;
-            noteTimer = setTimeout(playSongLoop, note.d * 1000 + 95);
-        }
-
         const musicBtn = document.getElementById('music-btn');
         const musicStatus = document.getElementById('music-status');
         const musicText = document.getElementById('music-text');
         const musicVolumeInput = document.getElementById('music-volume');
 
+        const holidayAudio = new Audio('assets/audio/natal-musicbox.mp3');
+        holidayAudio.loop = true;
+        holidayAudio.preload = 'metadata';
+        holidayAudio.volume = 0.35;
+
         function setMusicVolume(value) {
-            musicVolume = Math.max(0, Math.min(1, value / 100));
-            if (masterGain) {
-                masterGain.gain.setTargetAtTime(musicVolume, audioCtx.currentTime, 0.05);
-            }
+            holidayAudio.volume = Math.max(0, Math.min(1, value / 100));
         }
 
         if (musicVolumeInput) {
             musicVolumeInput.addEventListener('input', (e) => setMusicVolume(Number(e.target.value)));
         }
 
-        function toggleMusic() {
-            initAudioGraph();
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            setMusicVolume(musicVolumeInput ? Number(musicVolumeInput.value) : 35);
-
-            if (isPlaying) {
-                isPlaying = false;
-                clearTimeout(noteTimer);
-                noteIdx = 0;
-                musicStatus.classList.remove('bg-emerald-400');
-                musicStatus.classList.add('bg-red-400');
-                musicText.innerText = 'Natal';
-                musicBtn.setAttribute('aria-pressed', 'false');
-            } else {
-                isPlaying = true;
-                playSongLoop();
+        function setMusicUiPlaying(playing) {
+            if (playing) {
                 musicStatus.classList.remove('bg-red-400');
                 musicStatus.classList.add('bg-emerald-400');
                 musicText.innerText = 'Tocando';
                 musicBtn.setAttribute('aria-pressed', 'true');
                 musicBtn.classList.remove('music-btn-hint');
+            } else {
+                musicStatus.classList.remove('bg-emerald-400');
+                musicStatus.classList.add('bg-red-400');
+                musicText.innerText = 'Natal';
+                musicBtn.setAttribute('aria-pressed', 'false');
             }
         }
 
+        async function toggleMusic() {
+            setMusicVolume(musicVolumeInput ? Number(musicVolumeInput.value) : 35);
+
+            if (!holidayAudio.paused) {
+                holidayAudio.pause();
+                setMusicUiPlaying(false);
+                return;
+            }
+
+            try {
+                await holidayAudio.play();
+                setMusicUiPlaying(true);
+            } catch (err) {
+                console.warn('Não foi possível iniciar o áudio:', err);
+                setMusicUiPlaying(false);
+            }
+        }
+
+        holidayAudio.addEventListener('ended', () => setMusicUiPlaying(false));
         musicBtn.addEventListener('click', toggleMusic);
 
         /* -------------------------------------------------------------
@@ -1405,39 +1260,17 @@
 
         function burstSparks(centerX, centerY) {
             if (reduceMotion) return;
-            for (let i = 0; i < 32; i++) {
+            const burstCount = Math.min(12, Math.max(0, 34 - particles.length));
+            for (let i = 0; i < burstCount; i++) {
                 const p = new MagicParticle();
                 p.x = centerX;
                 p.y = centerY;
-                p.speedX = (Math.random() - 0.5) * 7;
-                p.speedY = (Math.random() - 0.5) * 7 - 1;
-                p.size = Math.random() * 3 + 1.5;
+                p.speedX = (Math.random() - 0.5) * 5;
+                p.speedY = (Math.random() - 0.5) * 5 - 1;
+                p.size = Math.random() * 2.5 + 1;
                 p.color = Math.random() > 0.5 ? '#fde9b8' : '#f8c1cf';
                 particles.push(p);
             }
-        }
-
-        function playSealPop() {
-            if (reduceMotion) return;
-            try {
-                initAudioGraph();
-                if (!audioCtx || audioCtx.state === 'suspended') {
-                    audioCtx.resume();
-                }
-                const t = audioCtx.currentTime;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(520, t);
-                osc.frequency.exponentialRampToValueAtTime(180, t + 0.08);
-                gain.gain.setValueAtTime(0.001, t);
-                gain.gain.exponentialRampToValueAtTime(0.04 * (musicVolume / 0.35), t + 0.01);
-                gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
-                osc.connect(gain);
-                gain.connect(audioCtx._fadaBus || audioCtx.destination);
-                osc.start(t);
-                osc.stop(t + 0.14);
-            } catch (_) { /* optional */ }
         }
 
         function revealLetterPanel() {
@@ -1470,8 +1303,6 @@
             if (navigator.vibrate && !reduceMotion) {
                 navigator.vibrate(12);
             }
-
-            playSealPop();
 
             const rect = envelopeEl.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
